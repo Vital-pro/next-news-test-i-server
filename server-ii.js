@@ -11,9 +11,9 @@ app.use(express.static('public'))
 
 const url = 'http://vesti-sudak.ru/'
 
-const articles_data = []
 
 async function getGanre() {
+  const articles_data = []
   try {
     const response = await fetch(url)
     const data = await response.text()
@@ -49,7 +49,6 @@ async function getGanre() {
 app.get('/start', (req, res) => {
   const resArr = getGanre().then(f => console.log(f)) //!!!!!! ******START!!!
   res.redirect('/')
-  res.send('fg!')
   res.status(200).end()
 })
 
