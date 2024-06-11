@@ -12,8 +12,9 @@ app.use(express.static('public'))
 const url = 'http://vesti-sudak.ru/'
 
 
+const articles_data = []
+
 async function getGanre() {
-  const articles_data = []
   try {
     const response = await fetch(url)
     const data = await response.text()
@@ -27,6 +28,8 @@ async function getGanre() {
       // image = $(this).find('div > a > img').attr('srcset').split(',') // official
       image = $(this).find('div > a > img').attr('srcset').split(' ')[0].trim() // official
 
+      // articles_data.push({link, title, image})  // official
+      articles_data.splice(9)
       articles_data.push({link, title, image})  // official
       // articles_data.push({link}) // test
     })
@@ -54,7 +57,7 @@ app.get('/start', (req, res) => {
 
 // routes
 app.get('/news', (req, res) => {
-  const {subreddit} = req.params
+  // const {subreddit} = req.params
   // console.log(news);
   // const data = getGanre()
     res.status(200).json(articles_data)
