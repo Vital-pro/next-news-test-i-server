@@ -4,9 +4,9 @@ const cors = require('cors')
 
 const fs = require('fs')
 
-const data = fs.readFileSync('./posts.json', 'utf8');
+const data1 = fs.readFileSync('./posts.json', 'utf8');
 // const articles_data = JSON.parse(data);
-console.log(data);
+// console.log(data);
 const app = express()
 const PORT = process.env.PORT || 3333
 
@@ -68,7 +68,7 @@ app.get('/news', (req, res) => {
   // const {subreddit} = req.params
   // console.log(news);
   // const data = getGanre()
-    res.status(200).json(data)
+    res.status(200).json(data1)
 
   
 })
