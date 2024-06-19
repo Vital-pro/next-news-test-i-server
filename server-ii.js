@@ -2,6 +2,11 @@ const cheerio = require('cheerio');
 const express = require('express')
 const cors = require('cors')
 
+const fs = require('fs')
+
+const data = fs.readFileSync('./posts.json', 'utf8');
+// const articles_data = JSON.parse(data);
+console.log(data);
 const app = express()
 const PORT = process.env.PORT || 3333
 
@@ -12,7 +17,7 @@ app.use(express.static('public'))
 const url = 'http://vesti-sudak.ru/'
 
 
-const articles_data = []
+const articles_data1 = []
 
 async function getGanre() {
   try {
@@ -29,14 +34,17 @@ async function getGanre() {
       image = $(this).find('div > a > img').attr('srcset').split(' ')[0].trim() // official
 
       // articles_data.push({link, title, image})  // official
-      articles_data.splice(9)
-      articles_data.push({link, title, image})  // official
+      articles_data1.splice(9)
+      articles_data1.push({link, title, image})  // official
       // articles_data.push({link}) // test
     })
 
+    fs.writeFileSync('./posts.json', JSON.stringify(articles_data1));
+
+
     // console.log(articles_data);
 
-    return articles_data
+    // return articles_data //todo
 
     // console.log(articles_data);
     // console.log(articles_data.length);
@@ -60,7 +68,7 @@ app.get('/news', (req, res) => {
   // const {subreddit} = req.params
   // console.log(news);
   // const data = getGanre()
-    res.status(200).json(articles_data)
+    res.status(200).json(data)
 
   
 })
