@@ -75,7 +75,7 @@ async function getGanre() {
 
 // getGanre()
 app.get('/start', (req, res) => {
-  cron(interval, getGanre().then((f) => console.log(f)));              //!!!!!! ******START!!!
+  getGanre().then((f) => console.log(f));              //!!!!!! ******START!!!
   res.redirect('/')
   res.status(200).end()
 })
