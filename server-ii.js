@@ -69,7 +69,7 @@ app.get('/news', (req, res) => {
   // const {subreddit} = req.params
   // console.log(news);
   // const data = getGanre()
-    res.status(200).json(JSON.parse(articles_data1)) //JSON.stringify(articles_data1);
+    res.status(200).json(JSON.stringify(articles_data1)); //JSON.stringify(articles_data1);
 
   
 })
