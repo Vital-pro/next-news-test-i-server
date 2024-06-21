@@ -13,17 +13,17 @@ const PORT = process.env.PORT || 3333
 
 //***start******** */
 
-// const interval = 60000;
-// function cron(ms, fn) {
-//   async function cb() {
-//     clearTimeout(timeout);
-//     await fn();
-//     setTimeout(cb, ms);
-//   }
-//   let timeout = setTimeout(cb, ms);
-//   // return () => clearTimeout(timeout);
-//   return () => {};
-// }
+const interval = 60000;
+function cron(ms, fn) {
+  async function cb() {
+    clearTimeout(timeout);
+    await fn();
+    setTimeout(cb, ms);
+  }
+  let timeout = setTimeout(cb, ms);
+  // return () => clearTimeout(timeout);
+  return () => {};
+}
 
 //***finish*********** */
 
@@ -75,7 +75,7 @@ async function getGanre() {
 
 // getGanre()
 app.get('/start', (req, res) => {
-  getGanre().then((f) => console.log(f));              //!!!!!! ******START!!!
+  cron(interval, getGanre().then((f) => console.log(f.length)));              //!!!!!! ******START!!!
   res.redirect('/')
   res.status(200).end()
 })
