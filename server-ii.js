@@ -11,7 +11,7 @@ const fs = require('fs')
 const app = express()
 const PORT = process.env.PORT || 3333
 
-// app.use(express.json())
+app.use(express.json())
 app.use(cors())
 app.use(express.static('public'))
 
@@ -69,7 +69,7 @@ app.get('/news', (req, res) => {
   // const {subreddit} = req.params
   // console.log(news);
   // const data = getGanre()
-    res.status(200).json(JSON.stringify(articles_data1)); //JSON.stringify(articles_data1);
+    res.status(200).json(articles_data1); //JSON.stringify(articles_data1);
 
   
 })
