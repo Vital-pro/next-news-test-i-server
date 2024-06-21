@@ -11,6 +11,22 @@ const fs = require('fs')
 const app = express()
 const PORT = process.env.PORT || 3333
 
+//***start******** */
+
+const interval = 60000;
+function cron(ms, fn) {
+  async function cb() {
+    clearTimeout(timeout);
+    await fn();
+    setTimeout(cb, ms);
+  }
+  let timeout = setTimeout(cb, ms);
+  // return () => clearTimeout(timeout);
+  return () => {};
+}
+
+//***finish*********** */
+
 app.use(express.json())
 app.use(cors())
 app.use(express.static('public'))
@@ -59,7 +75,7 @@ async function getGanre() {
 
 // getGanre()
 app.get('/start', (req, res) => {
-  const resArr = getGanre().then(f => console.log(f)) //!!!!!! ******START!!!
+  cron(interval, () => getGanre().then((f) => console.log(f.length)));              //!!!!!! ******START!!!
   res.redirect('/')
   res.status(200).end()
 })
@@ -69,7 +85,7 @@ app.get('/news', (req, res) => {
   // const {subreddit} = req.params
   // console.log(news);
   // const data = getGanre()
-    res.status(200).json(articles_data1); //JSON.stringify(articles_data1);
+    res.status(200).json(articles_data1); 
 
   
 })
