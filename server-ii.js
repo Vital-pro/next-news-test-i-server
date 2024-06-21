@@ -4,8 +4,8 @@ const cors = require('cors')
 
 const fs = require('fs')
 
-const data1 = fs.readFileSync('./posts.json', 'utf8');
-const data2 = JSON.parse(data1);
+// const data1 = fs.readFileSync('./posts.json', 'utf8'); //!
+// const data2 = JSON.parse(data1); //!
 // const articles_data = JSON.parse(data);
 // console.log(data2);
 const app = express()
@@ -40,12 +40,12 @@ async function getGanre() {
       // articles_data.push({link}) // test
     })
 
-    fs.writeFileSync('./posts.json', JSON.stringify(articles_data1));
+    // fs.writeFileSync('./posts.json', JSON.stringify(articles_data1)); //!
 
 
     // console.log(articles_data);
 
-    // return articles_data //todo
+    return articles_data1 //todo
 
     // console.log(articles_data);
     // console.log(articles_data.length);
@@ -69,7 +69,7 @@ app.get('/news', (req, res) => {
   // const {subreddit} = req.params
   // console.log(news);
   // const data = getGanre()
-    res.status(200).json(data2)
+    res.status(200).json(articles_data1);
 
   
 })
